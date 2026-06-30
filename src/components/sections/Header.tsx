@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Menu, X, ChevronRight } from "lucide-react";
+import { X, ChevronRight, Activity } from "lucide-react";
 import Button from "../ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -69,15 +69,19 @@ export default function Header() {
         initial={{ y: -100, x: "-50%" }}
         animate={{ y: 0, x: "-50%" }}
         transition={{ type: "spring", stiffness: 120, damping: 20 }}
-        className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[95%] sm:w-[90%] max-w-5xl rounded-full ${
+        className={`fixed z-50 transition-all duration-500 ${
           isScrolled
-            ? "top-4 bg-white/70 backdrop-blur-xl border border-slate-200/40 shadow-[0_20px_50px_rgba(15,23,42,0.06)] py-2.5 px-6"
-            : "top-6 bg-white/30 backdrop-blur-md border border-white/50 py-4 px-8"
+            ? "top-3 right-4 left-auto translate-x-0 bg-white/70 backdrop-blur-xl border border-slate-200/40 shadow-[0_20px_50px_rgba(15,23,42,0.06)] py-1.5 px-2 rounded-full"
+            : "top-4 right-4 left-auto translate-x-0 bg-white/30 backdrop-blur-md border border-white/50 py-2 px-2.5 rounded-full"
+        } md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-[90%] md:max-w-5xl md:rounded-full ${
+          isScrolled
+            ? "md:top-4 md:py-2.5 md:px-6"
+            : "md:top-6 md:py-4 md:px-8"
         }`}
       >
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <a href="#home" className="flex items-center gap-3 group">
+          {/* Logo - Hidden on mobile, shown on desktop */}
+          <a href="#home" className="hidden md:flex items-center gap-3 group">
             <div className="relative w-10 h-10 transition-transform group-hover:scale-105 duration-300">
               <Image
                 src="/images/logo.png"
@@ -130,13 +134,17 @@ export default function Header() {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - hidden on desktop/laptop */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none cursor-pointer"
+            className="md:hidden p-2 text-slate-650 hover:text-slate-900 focus:outline-none cursor-pointer flex items-center justify-center rounded-full"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? (
+              <X className="w-5.5 h-5.5" />
+            ) : (
+              <Activity className="w-5.5 h-5.5 text-primary" />
+            )}
           </button>
         </div>
       </motion.header>

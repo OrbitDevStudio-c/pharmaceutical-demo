@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Dna } from "lucide-react";
+import { ArrowRight, Dna, Microscope, Atom, HeartPulse, FlaskConical, ShieldCheck } from "lucide-react";
 import Container from "../ui/Container";
 import Button from "../ui/Button";
 
@@ -96,7 +96,7 @@ export default function Hero() {
           </motion.div>
         ))}
 
-        {/* 3D-like Floating DNA Helix Icon */}
+        {/* 3D-like Floating DNA Helix Icon (Top-Right) */}
         <motion.div
           animate={{
             y: [0, -25, 0],
@@ -106,12 +106,12 @@ export default function Hero() {
             y: { duration: 12, repeat: Infinity, ease: "easeInOut" },
             rotateY: { duration: 25, repeat: Infinity, ease: "linear" },
           }}
-          className="absolute top-[18%] right-[10%] md:right-[15%] w-16 h-16 rounded-[20px] glass-panel hidden sm:flex items-center justify-center shadow-2xl text-primary border border-white/60"
+          className="absolute top-[18%] right-[8%] w-15 h-15 rounded-[20px] glass-panel hidden sm:flex items-center justify-center shadow-2xl text-primary border border-white/60"
         >
-          <Dna className="w-8 h-8 text-primary" />
+          <Dna className="w-7 h-7 text-primary" />
         </motion.div>
 
-        {/* Floating Capsule Vector */}
+        {/* Floating Capsule Vector (Bottom-Right-Middle) */}
         <motion.div
           animate={{
             y: [0, 20, 0],
@@ -122,13 +122,75 @@ export default function Hero() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-[20%] right-[25%] w-14 h-14 rounded-2xl glass-panel hidden md:flex items-center justify-center shadow-xl text-teal-accent border border-white/60"
+          className="absolute bottom-[16%] right-[14%] w-14 h-14 rounded-2xl glass-panel hidden md:flex items-center justify-center shadow-xl text-teal-accent border border-white/60"
         >
           {/* Custom Capsule SVG */}
           <svg className="w-7 h-7 text-teal-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <rect x="2" y="9" width="20" height="6" rx="3" transform="rotate(45 12 12)" />
             <path d="M7.7 7.7l8.6 8.6" />
           </svg>
+        </motion.div>
+
+        {/* Floating Microscope Card (Middle-Left, far edge) */}
+        <motion.div
+          animate={{
+            y: [0, -18, 0],
+            rotate: [-5, 5, -5],
+          }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[38%] left-[5%] w-14 h-14 rounded-2xl glass-panel hidden lg:flex items-center justify-center shadow-lg text-primary border border-white/60"
+        >
+          <Microscope className="w-6.5 h-6.5 text-primary" />
+        </motion.div>
+
+        {/* Floating Atom Card (Middle-Right, far edge) */}
+        <motion.div
+          animate={{
+            y: [0, 22, 0],
+            rotate: [0, 360],
+          }}
+          transition={{
+            y: { duration: 13, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+          }}
+          className="absolute top-[48%] right-[5%] w-14 h-14 rounded-2xl glass-panel hidden lg:flex items-center justify-center shadow-lg text-teal-accent border border-white/60"
+        >
+          <Atom className="w-6.5 h-6.5 text-teal-accent" />
+        </motion.div>
+
+        {/* Floating HeartPulse Card (Bottom-Left, below text margins) */}
+        <motion.div
+          animate={{
+            scale: [1, 1.08, 1],
+            y: [0, -10, 0],
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[12%] left-[8%] w-13 h-13 rounded-2xl glass-panel hidden md:flex items-center justify-center shadow-md text-teal-accent border border-white/60"
+        >
+          <HeartPulse className="w-6 h-6 text-teal-accent" />
+        </motion.div>
+
+        {/* Floating FlaskConical Card (Top-Left, above text margins) */}
+        <motion.div
+          animate={{
+            y: [0, -15, 0],
+            rotate: [10, -10, 10],
+          }}
+          transition={{ duration: 9.5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] left-[10%] w-13 h-13 rounded-2xl glass-panel hidden md:flex items-center justify-center shadow-md text-primary border border-white/60"
+        >
+          <FlaskConical className="w-6 h-6 text-primary" />
+        </motion.div>
+
+        {/* Floating ShieldCheck Card (Top-Middle-Right, above text margins) */}
+        <motion.div
+          animate={{
+            y: [0, 12, 0],
+          }}
+          transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[12%] left-[45%] w-13 h-13 rounded-2xl glass-panel hidden sm:flex items-center justify-center shadow-md text-primary border border-white/60"
+        >
+          <ShieldCheck className="w-6 h-6 text-primary" />
         </motion.div>
       </div>
 
@@ -209,30 +271,6 @@ export default function Hero() {
         </div>
       </Container>
 
-      {/* Premium Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 hidden md:flex flex-col items-center gap-2 select-none"
-      >
-        <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">
-          Scroll Down
-        </span>
-        <motion.div
-          animate={{
-            y: [0, 8, 0],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="w-6 h-10 rounded-full border-2 border-slate-300 flex justify-center pt-2"
-        >
-          <motion.div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
