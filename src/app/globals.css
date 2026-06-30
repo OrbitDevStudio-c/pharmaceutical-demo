@@ -154,3 +154,11 @@ body {
   background-color: rgba(10, 102, 194, 0.1);
   color: #0A66C2;
 }
+
+/* Body scroll lock utility when mobile menu drawer is active */
+.overflow-hidden-mobile {
+  overflow: hidden !important;
+  height: 100vh !important;
+  position: fixed !important;
+  width: 100% !important;
+}

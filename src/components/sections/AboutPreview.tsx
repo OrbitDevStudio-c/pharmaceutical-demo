@@ -102,7 +102,7 @@ export default function AboutPreview() {
             className="lg:col-span-5 relative flex items-center justify-center"
           >
             {/* Background elements */}
-            <div className="absolute top-[10%] left-[-5%] w-[120%] h-[110%] border border-slate-100 rounded-[32px] pointer-events-none select-none" />
+            <div className="hidden sm:block absolute top-[10%] left-[-5%] w-[120%] h-[110%] border border-slate-100 rounded-[32px] pointer-events-none select-none" />
 
             {/* Main Image Collage Frame */}
             <div className="relative w-full aspect-[4/5] rounded-[32px] overflow-hidden shadow-2xl border border-slate-200/50 group">
@@ -120,7 +120,7 @@ export default function AboutPreview() {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-6 -left-6 z-20 glass-panel p-5 rounded-2xl shadow-xl flex items-center gap-4 max-w-xs border border-white/60"
+              className="absolute -top-4 left-4 sm:-top-6 sm:-left-6 z-20 glass-panel p-4 sm:p-5 rounded-2xl shadow-xl flex items-center gap-3 sm:gap-4 max-w-[240px] sm:max-w-xs border border-white/60"
             >
               <div className="w-10 h-10 rounded-xl bg-teal-accent/10 text-teal-accent flex items-center justify-center shrink-0">
                 <Sparkles className="w-5 h-5" />
@@ -134,7 +134,7 @@ export default function AboutPreview() {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-6 -right-6 z-20 glass-panel p-5 rounded-2xl shadow-xl flex items-center gap-4 max-w-xs border border-white/60"
+              className="absolute -bottom-4 right-4 sm:-bottom-6 sm:-right-6 z-20 glass-panel p-4 sm:p-5 rounded-2xl shadow-xl flex items-center gap-3 sm:gap-4 max-w-[240px] sm:max-w-xs border border-white/60"
             >
               <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
                 <Target className="w-5 h-5" />

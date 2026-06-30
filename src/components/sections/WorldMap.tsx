@@ -247,118 +247,123 @@ export default function WorldMap() {
               `
             }} />
 
-            {/* SVG Dotted / Outline map */}
-            <div
-              id="world-map-container"
-              className="w-full relative select-none pointer-events-none"
-              dangerouslySetInnerHTML={{ __html: svgText }}
-            />
+            {/* Scrollable Map Container for Mobile Usability */}
+            <div className="w-full overflow-x-auto scrollbar-none py-8">
+              <div className="relative min-w-[760px] lg:min-w-0 w-full">
+                {/* SVG Dotted / Outline map */}
+                <div
+                  id="world-map-container"
+                  className="w-full relative select-none pointer-events-none"
+                  dangerouslySetInnerHTML={{ __html: svgText }}
+                />
 
-            {/* Vector Curved Routes (Overlay) */}
-            {activeView === "presence" && (
-              <svg className="absolute inset-0 w-full h-full pointer-events-none z-15" viewBox="0 0 100 100" preserveAspectRatio="none">
-                {/* Albany -> Cardiff */}
-                <path d="M 24.8,36.5 Q 34.65,29.25 44.5,32" fill="none" stroke="rgba(10, 102, 194, 0.4)" strokeWidth="0.25" />
-                <path d="M 24.8,36.5 Q 34.65,29.25 44.5,32" fill="none" stroke="#0A66C2" strokeWidth="0.35" className="dash-route" />
+                {/* Vector Curved Routes (Overlay) */}
+                {activeView === "presence" && (
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none z-15" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    {/* Albany -> Cardiff */}
+                    <path d="M 24.8,36.5 Q 34.65,29.25 44.5,32" fill="none" stroke="rgba(10, 102, 194, 0.4)" strokeWidth="0.25" />
+                    <path d="M 24.8,36.5 Q 34.65,29.25 44.5,32" fill="none" stroke="#0A66C2" strokeWidth="0.35" className="dash-route" />
 
-                {/* Albany -> Lucerne */}
-                <path d="M 24.8,36.5 Q 35.65,30.5 46.5,34.5" fill="none" stroke="rgba(10, 102, 194, 0.4)" strokeWidth="0.25" />
-                <path d="M 24.8,36.5 Q 35.65,30.5 46.5,34.5" fill="none" stroke="#0A66C2" strokeWidth="0.35" className="dash-route" />
+                    {/* Albany -> Lucerne */}
+                    <path d="M 24.8,36.5 Q 35.65,30.5 46.5,34.5" fill="none" stroke="rgba(10, 102, 194, 0.4)" strokeWidth="0.25" />
+                    <path d="M 24.8,36.5 Q 35.65,30.5 46.5,34.5" fill="none" stroke="#0A66C2" strokeWidth="0.35" className="dash-route" />
 
-                {/* Albany -> Saly */}
-                <path d="M 24.8,36.5 Q 32.65,40 40.5,51.5" fill="none" stroke="rgba(10, 102, 194, 0.4)" strokeWidth="0.25" />
-                <path d="M 24.8,36.5 Q 32.65,40 40.5,51.5" fill="none" stroke="#0A66C2" strokeWidth="0.35" className="dash-route" />
+                    {/* Albany -> Saly */}
+                    <path d="M 24.8,36.5 Q 32.65,40 40.5,51.5" fill="none" stroke="rgba(10, 102, 194, 0.4)" strokeWidth="0.25" />
+                    <path d="M 24.8,36.5 Q 32.65,40 40.5,51.5" fill="none" stroke="#0A66C2" strokeWidth="0.35" className="dash-route" />
 
-                {/* Albany -> Ahmedabad */}
-                <path d="M 24.8,36.5 Q 44.3,33.5 63.8,46.5" fill="none" stroke="rgba(10, 102, 194, 0.4)" strokeWidth="0.25" />
-                <path d="M 24.8,36.5 Q 44.3,33.5 63.8,46.5" fill="none" stroke="#0A66C2" strokeWidth="0.35" className="dash-route" />
+                    {/* Albany -> Ahmedabad */}
+                    <path d="M 24.8,36.5 Q 44.3,33.5 63.8,46.5" fill="none" stroke="rgba(10, 102, 194, 0.4)" strokeWidth="0.25" />
+                    <path d="M 24.8,36.5 Q 44.3,33.5 63.8,46.5" fill="none" stroke="#0A66C2" strokeWidth="0.35" className="dash-route" />
 
-                {/* Ahmedabad -> Perth */}
-                <path d="M 63.8,46.5 Q 72.65,55 81.5,76.5" fill="none" stroke="rgba(13, 148, 136, 0.4)" strokeWidth="0.25" />
-                <path d="M 63.8,46.5 Q 72.65,55 81.5,76.5" fill="none" stroke="#0D9488" strokeWidth="0.35" className="dash-route" />
+                    {/* Ahmedabad -> Perth */}
+                    <path d="M 63.8,46.5 Q 72.65,55 81.5,76.5" fill="none" stroke="rgba(13, 148, 136, 0.4)" strokeWidth="0.25" />
+                    <path d="M 63.8,46.5 Q 72.65,55 81.5,76.5" fill="none" stroke="#0D9488" strokeWidth="0.35" className="dash-route" />
 
-                {/* Ahmedabad -> Hebron */}
-                <path d="M 63.8,46.5 Q 58.65,40 53.5,41.5" fill="none" stroke="rgba(13, 148, 136, 0.4)" strokeWidth="0.25" />
-                <path d="M 63.8,46.5 Q 58.65,40 53.5,41.5" fill="none" stroke="#0D9488" strokeWidth="0.35" className="dash-route" />
-              </svg>
-            )}
+                    {/* Ahmedabad -> Hebron */}
+                    <path d="M 63.8,46.5 Q 58.65,40 53.5,41.5" fill="none" stroke="rgba(13, 148, 136, 0.4)" strokeWidth="0.25" />
+                    <path d="M 63.8,46.5 Q 58.65,40 53.5,41.5" fill="none" stroke="#0D9488" strokeWidth="0.35" className="dash-route" />
+                  </svg>
+                )}
 
-            {/* Pins */}
-            <AnimatePresence>
-              {activeView === "presence" &&
-                presenceLocations.map((pin) => (
-                  <div
-                    key={pin.name}
-                    className="absolute z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
-                    style={{ left: pin.coords.left, top: pin.coords.top }}
-                    onMouseEnter={() => setHoveredPin(pin)}
-                    onMouseLeave={() => setHoveredPin(null)}
-                  >
-                    <div className="relative flex items-center justify-center">
-                      <span className={`absolute inline-flex h-8 w-8 rounded-full opacity-50 animate-ping ${
-                        pin.role === "corporate" ? "bg-primary" : pin.role === "research" ? "bg-teal-accent" : "bg-amber-500"
-                      }`} />
-                      <motion.div
-                        whileHover={{ scale: 1.2 }}
-                        className={`w-6.5 h-6.5 rounded-full flex items-center justify-center shadow-lg border border-slate-800 ring-4 ${getPinBg(
-                          pin.role
-                        )}`}
+                {/* Pins */}
+                <AnimatePresence>
+                  {activeView === "presence" &&
+                    presenceLocations.map((pin) => (
+                      <div
+                        key={pin.name}
+                        className="absolute z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+                        style={{ left: pin.coords.left, top: pin.coords.top }}
+                        onMouseEnter={() => setHoveredPin(pin)}
+                        onMouseLeave={() => setHoveredPin(null)}
                       >
-                        {getPinIcon(pin.role)}
-                      </motion.div>
-                    </div>
-                  </div>
-                ))}
-            </AnimatePresence>
+                        <div className="relative flex items-center justify-center">
+                          <span className={`absolute inline-flex h-8 w-8 rounded-full opacity-50 animate-ping ${
+                            pin.role === "corporate" ? "bg-primary" : pin.role === "research" ? "bg-teal-accent" : "bg-amber-500"
+                          }`} />
+                          <motion.div
+                            whileHover={{ scale: 1.2 }}
+                            className={`w-6.5 h-6.5 rounded-full flex items-center justify-center shadow-lg border border-slate-800 ring-4 ${getPinBg(
+                              pin.role
+                            )}`}
+                          >
+                            {getPinIcon(pin.role)}
+                          </motion.div>
+                        </div>
+                      </div>
+                    ))}
+                </AnimatePresence>
 
-            {/* Tooltip Popup */}
-            <AnimatePresence>
-              {activeView === "presence" && hoveredPin && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute z-30 pointer-events-none p-5 rounded-2xl glass-panel-dark shadow-2xl border border-white/5 w-72 md:w-80"
-                  style={{
-                    left: `calc(${hoveredPin.coords.left} + 16px)`,
-                    top: `calc(${hoveredPin.coords.top} - 100px)`,
-                  }}
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <MapPin className="w-4 h-4 text-teal-accent" />
-                    <h4 className="text-sm font-extrabold text-white">{hoveredPin.name}</h4>
-                  </div>
-                  <div className="mb-2.5">
-                    <span className="text-[9.5px] font-extrabold uppercase tracking-widest text-teal-accent bg-teal-accent/10 border border-teal-accent/20 px-2 py-0.5 rounded">
-                      {hoveredPin.type}
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-slate-400 font-bold leading-normal">
-                    {hoveredPin.details}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                {/* Tooltip Popup */}
+                <AnimatePresence>
+                  {activeView === "presence" && hoveredPin && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute z-30 pointer-events-none p-5 rounded-2xl glass-panel-dark shadow-2xl border border-white/5 w-72 md:w-80"
+                      style={{
+                        left: `calc(${hoveredPin.coords.left} + 16px)`,
+                        top: `calc(${hoveredPin.coords.top} - 100px)`,
+                      }}
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <MapPin className="w-4 h-4 text-teal-accent" />
+                        <h4 className="text-sm font-extrabold text-white">{hoveredPin.name}</h4>
+                      </div>
+                      <div className="mb-2.5">
+                        <span className="text-[9.5px] font-extrabold uppercase tracking-widest text-teal-accent bg-teal-accent/10 border border-teal-accent/20 px-2 py-0.5 rounded">
+                          {hoveredPin.type}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-slate-400 font-bold leading-normal">
+                        {hoveredPin.details}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
 
-            {/* Floating Map Legend */}
-            <div className="absolute bottom-6 left-6 z-10 hidden sm:flex flex-col gap-2 p-4 bg-slate-950/80 backdrop-blur-md rounded-2xl border border-slate-800 shadow-xl max-w-[200px]">
-              <p className="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest">Network Codes</p>
-              <div className="flex flex-col gap-1.5 text-[10.5px] font-bold text-slate-400">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-primary" />
+            {/* Floating Map Legend (Mobile Responsive) */}
+            <div className="absolute bottom-4 left-4 z-20 flex flex-col gap-1.5 p-3 bg-slate-950/90 backdrop-blur-md rounded-2xl border border-slate-800 shadow-xl max-w-[155px] sm:max-w-[200px]">
+              <p className="text-[8px] sm:text-[9px] font-extrabold text-slate-550 uppercase tracking-widest">Network Codes</p>
+              <div className="flex flex-col gap-1 text-[9.5px] sm:text-[10.5px] font-bold text-slate-400">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
                   <span>Corporate HQ</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-teal-accent" />
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-teal-accent shrink-0" />
                   <span>Research HQ</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-600" />
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-amber-600 shrink-0" />
                   <span>Logistics Hubs</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-indigo-600" />
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-indigo-600 shrink-0" />
                   <span>Regulatory Support</span>
                 </div>
               </div>

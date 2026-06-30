@@ -45,7 +45,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-slate-900">
           
           {/* Column 1: Info & Awards */}
-          <div className="lg:col-span-4 flex flex-col items-start gap-6">
+          <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left gap-6">
             <a href="#home" className="flex items-center gap-3 group">
               <div className="relative w-10 h-10 transition-transform group-hover:scale-105 duration-300">
                 <Image
@@ -88,7 +88,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Quick Links */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 text-center lg:text-left">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-6">Company</h4>
             <ul className="flex flex-col gap-3.5 text-xs font-medium">
               {quickLinks.map((link) => (
@@ -102,7 +102,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Products */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 text-center lg:text-left">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-6">Products</h4>
             <ul className="flex flex-col gap-3.5 text-xs font-medium">
               {productLinks.map((link) => (
@@ -116,14 +116,14 @@ export default function Footer() {
           </div>
 
           {/* Column 4: Newsletter & Awards */}
-          <div className="lg:col-span-4 flex flex-col gap-8">
+          <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left gap-8">
             <div>
               <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-2">Subscribe to Scientific Insights</h4>
               <p className="text-slate-500 text-xs font-medium leading-normal mb-4">
                 Receive our quarterly journals on drug discovery and global regulatory reports.
               </p>
               
-              <form onSubmit={handleSubscribe} className="relative w-full max-w-sm">
+              <form onSubmit={handleSubscribe} className="relative w-full max-w-sm mx-auto lg:mx-0">
                 <input
                   type="email"
                   value={email}
@@ -145,7 +145,7 @@ export default function Footer() {
             </div>
 
             {/* Awards seals */}
-            <div className="pt-4 border-t border-slate-900 flex gap-4 items-center">
+            <div className="pt-4 border-t border-slate-900 flex flex-wrap gap-4 items-center justify-center lg:justify-start">
               <div className="flex gap-2 items-center text-slate-500 text-[10.5px] font-bold">
                 <Trophy className="w-4.5 h-4.5 text-amber-500" />
                 <span>Global Quality Leadership 2026</span>
@@ -162,7 +162,7 @@ export default function Footer() {
         {/* Bottom row: copyright and legal links */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-[11px] font-medium text-slate-500">
           <p>© {new Date().getFullYear()} NovaCure Pharma. All rights reserved.</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center sm:justify-end gap-x-6 gap-y-2">
             <a href="#" className="hover:text-slate-400 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-slate-400 transition-colors">Terms of Service</a>
             <a href="#" className="hover:text-slate-400 transition-colors">Pharmacovigilance Reporting</a>

@@ -20,6 +20,17 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add("overflow-hidden-mobile");
+    } else {
+      document.body.classList.remove("overflow-hidden-mobile");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden-mobile");
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
     const sections = ["home", "about", "products", "why-choose-us", "research", "news"];
     const observerOptions = {
       root: null,

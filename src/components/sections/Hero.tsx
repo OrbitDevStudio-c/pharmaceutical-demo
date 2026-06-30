@@ -106,7 +106,7 @@ export default function Hero() {
             y: { duration: 12, repeat: Infinity, ease: "easeInOut" },
             rotateY: { duration: 25, repeat: Infinity, ease: "linear" },
           }}
-          className="absolute top-[18%] right-[10%] md:right-[15%] w-16 h-16 rounded-[20px] glass-panel flex items-center justify-center shadow-2xl text-primary border border-white/60"
+          className="absolute top-[18%] right-[10%] md:right-[15%] w-16 h-16 rounded-[20px] glass-panel hidden sm:flex items-center justify-center shadow-2xl text-primary border border-white/60"
         >
           <Dna className="w-8 h-8 text-primary" />
         </motion.div>
@@ -122,7 +122,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-[20%] right-[25%] w-14 h-14 rounded-2xl glass-panel flex items-center justify-center shadow-xl text-teal-accent border border-white/60"
+          className="absolute bottom-[20%] right-[25%] w-14 h-14 rounded-2xl glass-panel hidden md:flex items-center justify-center shadow-xl text-teal-accent border border-white/60"
         >
           {/* Custom Capsule SVG */}
           <svg className="w-7 h-7 text-teal-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -175,15 +175,15 @@ export default function Hero() {
             {/* Action Buttons */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap gap-4 mb-14"
+              className="flex flex-col sm:flex-row gap-4 mb-14 w-full sm:w-auto"
             >
-              <a href="#products">
-                <Button variant="primary" size="lg" className="gap-2.5 font-bold shadow-lg shadow-primary/20">
+              <a href="#products" className="w-full sm:w-auto">
+                <Button variant="primary" size="lg" className="w-full sm:w-auto gap-2.5 font-bold shadow-lg shadow-primary/20">
                   Explore Portfolio <ArrowRight className="w-4 h-4" />
                 </Button>
               </a>
-              <a href="#contact">
-                <Button variant="glass" size="lg" className="font-bold">
+              <a href="#contact" className="w-full sm:w-auto">
+                <Button variant="glass" size="lg" className="w-full sm:w-auto font-bold">
                   Connect With Us
                 </Button>
               </a>
@@ -192,7 +192,7 @@ export default function Hero() {
             {/* Hero Quick Statistics */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-3 gap-6 sm:gap-10 pt-8 border-t border-slate-200/60 w-full max-w-xl"
+              className="grid grid-cols-3 gap-4 sm:gap-10 pt-8 border-t border-slate-200/60 w-full max-w-xl"
             >
               {stats.map((stat, idx) => (
                 <div key={idx} className="flex flex-col">
