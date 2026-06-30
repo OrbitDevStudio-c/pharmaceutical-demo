@@ -41,32 +41,37 @@ export default function Stats() {
   ];
 
   return (
-    <section className="py-20 bg-primary text-white relative overflow-hidden">
-      {/* Decorative gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary-dark to-teal-dark z-0 opacity-95" />
+    <section className="py-28 bg-slate-950 text-white relative overflow-hidden">
+      {/* Dynamic background gradients */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-primary/10 to-teal-accent/5 z-0" />
       
-      {/* Floating white micro-lights */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[20%] left-[15%] w-1.5 h-1.5 bg-white/40 rounded-full animate-ping" />
-        <div className="absolute bottom-[30%] right-[20%] w-2 h-2 bg-white/30 rounded-full animate-ping" />
-      </div>
+      {/* High-tech dot pattern overlay */}
+      <div className="absolute inset-0 bg-dot-grid-dark opacity-30 z-0 pointer-events-none select-none" />
+
+      {/* Decorative vector light highlights */}
+      <div className="absolute top-[20%] left-[10%] w-72 h-72 bg-primary/20 rounded-full blur-[100px] z-0 pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[10%] w-72 h-72 bg-teal-accent/20 rounded-full blur-[100px] z-0 pointer-events-none" />
 
       <Container className="relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
           {statsList.map((stat, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.92, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="flex flex-col items-center justify-center p-4"
+              transition={{ type: "spring", stiffness: 80, damping: 15, delay: idx * 0.08 }}
+              className="flex flex-col items-center justify-center p-6 rounded-3xl bg-white/5 border border-white/5 shadow-2xl relative overflow-hidden"
             >
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-2">
+              {/* Subtle neon indicator top line */}
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-teal-accent to-transparent" />
+
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-none">
                 <AnimatedCounter value={stat.target} />
-                <span>{stat.suffix}</span>
+                <span className="text-teal-accent">{stat.suffix}</span>
               </div>
-              <p className="text-xs sm:text-sm font-semibold text-blue-100 uppercase tracking-widest mt-1">
+              
+              <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mt-4">
                 {stat.label}
               </p>
             </motion.div>

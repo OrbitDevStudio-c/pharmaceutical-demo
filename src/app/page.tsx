@@ -5,6 +5,7 @@ import TrustedBy from "@/components/sections/TrustedBy";
 import AboutPreview from "@/components/sections/AboutPreview";
 import ProductCategories from "@/components/sections/ProductCategories";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import WorldMap from "@/components/sections/WorldMap";
 import ResearchInnovation from "@/components/sections/ResearchInnovation";
 import Stats from "@/components/sections/Stats";
 import Testimonials from "@/components/sections/Testimonials";
@@ -22,6 +23,7 @@ export default function Home() {
         <AboutPreview />
         <ProductCategories />
         <WhyChooseUs />
+        <WorldMap />
         <ResearchInnovation />
         <Stats />
         <Testimonials />

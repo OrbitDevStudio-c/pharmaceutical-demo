@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Activity, Send, Check } from "lucide-react";
+import Image from "next/image";
+import { Send, Check, Award, Trophy } from "lucide-react";
 import Container from "../ui/Container";
 
 export default function Footer() {
@@ -35,15 +36,24 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-slate-950 text-slate-400 border-t border-slate-900 pt-20 pb-8">
-      <Container>
+    <footer className="bg-slate-950 text-slate-400 border-t border-slate-900 pt-24 pb-8 relative overflow-hidden">
+      {/* Background dot pattern */}
+      <div className="absolute inset-0 bg-dot-grid-dark opacity-10 pointer-events-none select-none" />
+
+      <Container className="relative z-10">
+        {/* Main Footer Links */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-slate-900">
           
-          {/* Column 1: Info & Socials */}
+          {/* Column 1: Info & Awards */}
           <div className="lg:col-span-4 flex flex-col items-start gap-6">
-            <a href="#home" className="flex items-center gap-2 group">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-md shadow-primary/20">
-                <Activity className="w-6 h-6" />
+            <a href="#home" className="flex items-center gap-3 group">
+              <div className="relative w-10 h-10 transition-transform group-hover:scale-105 duration-300">
+                <Image
+                  src="/images/logo.png"
+                  alt="NovaCure Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <div>
                 <span className="text-xl font-bold tracking-tight text-white">
@@ -105,33 +115,46 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Newsletter & Subscription */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
+          {/* Column 4: Newsletter & Awards */}
+          <div className="lg:col-span-4 flex flex-col gap-8">
             <div>
               <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-2">Subscribe to Scientific Insights</h4>
-              <p className="text-slate-500 text-xs font-medium leading-normal">
+              <p className="text-slate-500 text-xs font-medium leading-normal mb-4">
                 Receive our quarterly journals on drug discovery and global regulatory reports.
               </p>
+              
+              <form onSubmit={handleSubscribe} className="relative w-full max-w-sm">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={subscribed}
+                  placeholder="news@yourhospital.org"
+                  className="w-full bg-slate-900 border border-slate-800 rounded-full py-3.5 pl-5 pr-12 text-xs text-white placeholder-slate-650 focus:outline-none focus:border-teal-accent focus:ring-1 focus:ring-teal-accent transition-colors disabled:opacity-50"
+                />
+                <button
+                  type="submit"
+                  disabled={subscribed}
+                  className="absolute right-1.5 top-1.5 w-9 h-9 rounded-full bg-primary hover:bg-primary-dark text-white flex items-center justify-center transition-colors cursor-pointer disabled:bg-emerald-500"
+                  aria-label="Subscribe"
+                >
+                  {subscribed ? <Check className="w-4 h-4" /> : <Send className="w-4 h-4" />}
+                </button>
+              </form>
             </div>
-            
-            <form onSubmit={handleSubscribe} className="relative w-full max-w-sm">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={subscribed}
-                placeholder="news@yourhospital.org"
-                className="w-full bg-slate-900 border border-slate-800 rounded-full py-3 pl-5 pr-12 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-teal-accent focus:ring-1 focus:ring-teal-accent transition-colors disabled:opacity-50"
-              />
-              <button
-                type="submit"
-                disabled={subscribed}
-                className="absolute right-1.5 top-1.5 w-9 h-9 rounded-full bg-primary hover:bg-primary-dark text-white flex items-center justify-center transition-colors cursor-pointer disabled:bg-emerald-500"
-              >
-                {subscribed ? <Check className="w-4 h-4" /> : <Send className="w-4 h-4" />}
-              </button>
-            </form>
+
+            {/* Awards seals */}
+            <div className="pt-4 border-t border-slate-900 flex gap-4 items-center">
+              <div className="flex gap-2 items-center text-slate-500 text-[10.5px] font-bold">
+                <Trophy className="w-4.5 h-4.5 text-amber-500" />
+                <span>Global Quality Leadership 2026</span>
+              </div>
+              <div className="flex gap-2 items-center text-slate-500 text-[10.5px] font-bold">
+                <Award className="w-4.5 h-4.5 text-teal-accent" />
+                <span>WHO GMP Excellence Certificate</span>
+              </div>
+            </div>
           </div>
 
         </div>
