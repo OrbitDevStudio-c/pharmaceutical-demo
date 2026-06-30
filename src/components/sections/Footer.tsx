@@ -160,8 +160,25 @@ export default function Footer() {
         </div>
 
         {/* Bottom row: copyright and legal links */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-[11px] font-medium text-slate-500">
-          <p>© {new Date().getFullYear()} NovaCure Pharma. All rights reserved.</p>
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pt-8 text-[11px] font-medium text-slate-500">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
+            <p>© {new Date().getFullYear()} NovaCure Pharma. All rights reserved.</p>
+            {/* Credit section for OrbitDev Studio */}
+            <div className="flex items-center gap-2 border-t sm:border-t-0 sm:border-l border-slate-900 pt-3 sm:pt-0 sm:pl-6 justify-center sm:justify-start">
+              <span className="text-[10px] text-slate-650 font-extrabold uppercase tracking-widest shrink-0">Website Made By</span>
+              <a href="https://devstudiooffical.netlify.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
+                <div className="relative w-6 h-6">
+                  <Image
+                    src="/images/orbitdevstudio.png"
+                    alt="OrbitDev Studio Logo"
+                    fill
+                    className="object-contain filter brightness-110"
+                  />
+                </div>
+                <span className="text-xs font-extrabold text-white tracking-wide">OrbitDevStudio</span>
+              </a>
+            </div>
+          </div>
           <div className="flex flex-wrap justify-center sm:justify-end gap-x-6 gap-y-2">
             <a href="#" className="hover:text-slate-400 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-slate-400 transition-colors">Terms of Service</a>
