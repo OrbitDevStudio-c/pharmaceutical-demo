@@ -17,6 +17,14 @@ export default function WorldMap() {
   const [activeView, setActiveView] = useState<"presence" | "supply">("presence");
   const [hoveredPin, setHoveredPin] = useState<OfficeLocation | null>(null);
   const [svgText, setSvgText] = useState<string>("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     fetch("/images/world-map.svg")
@@ -89,13 +97,13 @@ export default function WorldMap() {
   const getPinIcon = (role: string) => {
     switch (role) {
       case "corporate":
-        return <Building2 className="w-4 h-4 text-white" />;
+        return <Building2 className="w-3 h-3 sm:w-4 sm:h-4 text-white" />;
       case "research":
-        return <FlaskConical className="w-4 h-4 text-white" />;
+        return <FlaskConical className="w-3 h-3 sm:w-4 sm:h-4 text-white" />;
       case "logistics":
-        return <Truck className="w-4 h-4 text-white" />;
+        return <Truck className="w-3 h-3 sm:w-4 sm:h-4 text-white" />;
       default:
-        return <ShieldCheck className="w-4 h-4 text-white" />;
+        return <ShieldCheck className="w-3 h-3 sm:w-4 sm:h-4 text-white" />;
     }
   };
 
@@ -162,7 +170,7 @@ export default function WorldMap() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
           
           {/* Main Map Box (col-span-9) */}
-          <div className="lg:col-span-9 relative rounded-[32px] bg-slate-900 border border-slate-800 p-4 sm:p-8 shadow-2xl overflow-hidden flex items-center justify-center min-h-[480px]">
+          <div className="lg:col-span-9 relative rounded-[32px] bg-slate-900 border border-slate-800 p-4 sm:p-8 shadow-2xl overflow-hidden flex flex-col justify-between min-h-[350px] sm:min-h-[480px]">
             {/* SVG styling rules for dark theme */}
             <style dangerouslySetInnerHTML={{
               __html: `
@@ -247,9 +255,9 @@ export default function WorldMap() {
               `
             }} />
 
-            {/* Scrollable Map Container for Mobile Usability */}
-            <div className="w-full overflow-x-auto scrollbar-none py-8">
-              <div className="relative min-w-[760px] lg:min-w-0 w-full">
+            {/* Map Canvas - scales automatically to viewport with NO horizontal scroll */}
+            <div className="relative w-full flex-1 flex items-center justify-center py-4">
+              <div className="relative w-full">
                 {/* SVG Dotted / Outline map */}
                 <div
                   id="world-map-container"
@@ -286,7 +294,7 @@ export default function WorldMap() {
                   </svg>
                 )}
 
-                {/* Pins */}
+                {/* Pins - scaled down with ring-2 on mobile */}
                 <AnimatePresence>
                   {activeView === "presence" &&
                     presenceLocations.map((pin) => (
@@ -296,14 +304,15 @@ export default function WorldMap() {
                         style={{ left: pin.coords.left, top: pin.coords.top }}
                         onMouseEnter={() => setHoveredPin(pin)}
                         onMouseLeave={() => setHoveredPin(null)}
+                        onClick={() => setHoveredPin(hoveredPin?.name === pin.name ? null : pin)}
                       >
                         <div className="relative flex items-center justify-center">
-                          <span className={`absolute inline-flex h-8 w-8 rounded-full opacity-50 animate-ping ${
+                          <span className={`absolute inline-flex h-6 w-6 sm:h-8 sm:w-8 rounded-full opacity-50 animate-ping ${
                             pin.role === "corporate" ? "bg-primary" : pin.role === "research" ? "bg-teal-accent" : "bg-amber-500"
                           }`} />
                           <motion.div
                             whileHover={{ scale: 1.2 }}
-                            className={`w-6.5 h-6.5 rounded-full flex items-center justify-center shadow-lg border border-slate-800 ring-4 ${getPinBg(
+                            className={`w-5 h-5 sm:w-6.5 sm:h-6.5 rounded-full flex items-center justify-center shadow-lg border border-slate-800 ring-2 sm:ring-4 ${getPinBg(
                               pin.role
                             )}`}
                           >
@@ -314,7 +323,7 @@ export default function WorldMap() {
                     ))}
                 </AnimatePresence>
 
-                {/* Tooltip Popup */}
+                {/* Tooltip Popup - Centers absolutely on mobile using screen checks */}
                 <AnimatePresence>
                   {activeView === "presence" && hoveredPin && (
                     <motion.div
@@ -322,15 +331,36 @@ export default function WorldMap() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute z-30 pointer-events-none p-5 rounded-2xl glass-panel-dark shadow-2xl border border-white/5 w-72 md:w-80"
-                      style={{
-                        left: `calc(${hoveredPin.coords.left} + 16px)`,
-                        top: `calc(${hoveredPin.coords.top} - 100px)`,
-                      }}
+                      className={`absolute z-35 p-5 rounded-2xl glass-panel-dark shadow-2xl border border-white/5 w-[85%] sm:w-72 md:w-80 pointer-events-auto ${
+                        isMobile 
+                          ? "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" 
+                          : ""
+                      }`}
+                      style={
+                        isMobile
+                          ? {}
+                          : {
+                              left: `calc(${hoveredPin.coords.left} + 16px)`,
+                              top: `calc(${hoveredPin.coords.top} - 100px)`,
+                            }
+                      }
                     >
-                      <div className="flex items-center gap-2 mb-2">
-                        <MapPin className="w-4 h-4 text-teal-accent" />
-                        <h4 className="text-sm font-extrabold text-white">{hoveredPin.name}</h4>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4 text-teal-accent" />
+                          <h4 className="text-sm font-extrabold text-white">{hoveredPin.name}</h4>
+                        </div>
+                        {isMobile && (
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setHoveredPin(null);
+                            }}
+                            className="text-slate-400 hover:text-white text-xs font-bold px-1.5 py-0.5 rounded bg-white/5 border border-white/10 cursor-pointer"
+                          >
+                            Close
+                          </button>
+                        )}
                       </div>
                       <div className="mb-2.5">
                         <span className="text-[9.5px] font-extrabold uppercase tracking-widest text-teal-accent bg-teal-accent/10 border border-teal-accent/20 px-2 py-0.5 rounded">
@@ -346,10 +376,10 @@ export default function WorldMap() {
               </div>
             </div>
 
-            {/* Floating Map Legend (Mobile Responsive) */}
-            <div className="absolute bottom-4 left-4 z-20 flex flex-col gap-1.5 p-3 bg-slate-950/90 backdrop-blur-md rounded-2xl border border-slate-800 shadow-xl max-w-[155px] sm:max-w-[200px]">
-              <p className="text-[8px] sm:text-[9px] font-extrabold text-slate-550 uppercase tracking-widest">Network Codes</p>
-              <div className="flex flex-col gap-1 text-[9.5px] sm:text-[10.5px] font-bold text-slate-400">
+            {/* Map Legend - Stacked below map on mobile, absolute on desktop */}
+            <div className="mt-4 lg:mt-0 lg:absolute lg:bottom-6 lg:left-6 z-10 w-full lg:w-auto lg:max-w-[200px] p-4 bg-slate-950/80 backdrop-blur-md rounded-2xl border border-slate-800 shadow-xl flex flex-col gap-2">
+              <p className="text-[8px] sm:text-[9px] font-extrabold text-slate-550 uppercase tracking-widest text-center lg:text-left">Network Codes</p>
+              <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 text-[9.5px] sm:text-[10.5px] font-bold text-slate-400">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
                   <span>Corporate HQ</span>

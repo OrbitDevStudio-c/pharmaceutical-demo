@@ -34,8 +34,8 @@ export default function Header() {
     const sections = ["home", "about", "products", "why-choose-us", "research", "news"];
     const observerOptions = {
       root: null,
-      rootMargin: "-100px 0px -60% 0px",
-      threshold: 0.15,
+      rootMargin: "-20% 0px -20% 0px",
+      threshold: 0.1,
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -145,29 +145,70 @@ export default function Header() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -20, x: "-50%" }}
-            animate={{ opacity: 1, scale: 1, y: 0, x: "-50%" }}
-            exit={{ opacity: 0, scale: 0.95, y: -20, x: "-50%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 35 }}
-            className="fixed top-20 left-1/2 -translate-x-1/2 w-[95%] z-45 bg-white/95 backdrop-blur-2xl shadow-2xl border border-slate-100 rounded-3xl p-6 md:hidden flex flex-col gap-4"
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "spring", stiffness: 280, damping: 28 }}
+            className="fixed inset-0 w-full h-screen z-[100] bg-white/75 backdrop-blur-3xl border-r border-white/20 flex flex-col p-6 md:hidden shadow-[0_0_50px_rgba(15,23,42,0.03)]"
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
+            {/* Header row in drawer */}
+            <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+              {/* Logo */}
+              <div className="flex items-center gap-3">
+                <div className="relative w-9 h-9">
+                  <Image
+                    src="/images/logo.png"
+                    alt="NovaCure Logo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <span className="text-base font-extrabold text-slate-900 leading-none block">
+                    NovaCure
+                  </span>
+                  <span className="text-[9px] block text-slate-500 font-extrabold uppercase tracking-widest mt-0.5">
+                    Pharma
+                  </span>
+                </div>
+              </div>
+              {/* Close Button */}
+              <button
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-between py-3 px-4 rounded-2xl hover:bg-slate-50 font-bold transition-all ${
-                  activeSection === link.id ? "text-primary bg-primary-light" : "text-slate-700"
-                }`}
+                className="p-2 text-slate-500 hover:text-slate-900 focus:outline-none cursor-pointer"
+                aria-label="Close menu"
               >
-                {link.name}
-                <ChevronRight className="w-4 h-4 text-slate-400" />
-              </a>
-            ))}
-            <div className="pt-4 border-t border-slate-100">
-              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="w-full">
-                <Button className="w-full" variant="primary">
-                  Get in Touch
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Menu Links */}
+            <div className="flex flex-col gap-2 overflow-y-auto flex-1 pr-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => {
+                    setActiveSection(link.id);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`flex items-center justify-between py-4 px-5 rounded-2xl hover:bg-slate-50 font-bold transition-all border border-transparent ${
+                    activeSection === link.id
+                      ? "text-primary bg-primary-light border-primary/5"
+                      : "text-slate-700"
+                  }`}
+                >
+                  <span className="text-sm">{link.name}</span>
+                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                </a>
+              ))}
+            </div>
+
+            {/* CTA Button at the bottom */}
+            <div className="pt-6 border-t border-slate-100 mt-auto">
+              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="w-full block">
+                <Button className="w-full py-4 text-sm font-bold shadow-md shadow-primary/10" variant="primary">
+                  Get In Touch
                 </Button>
               </a>
             </div>
